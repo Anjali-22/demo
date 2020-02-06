@@ -1,30 +1,42 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { FIREBASE_PROVIDERS, defaultFirebase } from 'angularfire2';
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { TabsPage } from '../pages/tabs/tabs';
+import { AddContactPage } from '../pages/add-contact/add-contact';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    AboutPage,
+    ContactPage,
+    HomePage,
+    TabsPage,
+    AddContactPage
   ],
   imports: [
-    BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    AboutPage,
+    ContactPage,
+    HomePage,
+    TabsPage,
+    AddContactPage
   ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
+    FIREBASE_PROVIDERS,
+    defaultFirebase({
+      apiKey: "AIzaSyCrZpORU_czh2oUrAkRrN7TyuZChUNx0B4",
+      authDomain: "myionic2firebase.firebaseapp.com",
+      databaseURL: "https://myionic2firebase.firebaseio.com",
+      storageBucket: "myionic2firebase.appspot.com",
+    })
   ]
 })
 export class AppModule {}
